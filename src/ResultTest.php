@@ -2,6 +2,6 @@
 
 namespace Wulfheart\Option;
 
-use Tests\TestCase;
+use Tests\LaravelTestCase;
 
-class ResultTest extends TestCase {}
+class ResultTest extends LaravelTestCase {}
