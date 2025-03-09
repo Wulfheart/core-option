@@ -37,9 +37,17 @@ class Result
         return $this->ok;
     }
 
-    public function hasErr(): bool
+    public function isErr(): bool
     {
         return ! $this->ok;
+    }
+
+    /**
+     * @param  TError  $err
+     */
+    public function hasErr(mixed $err): bool
+    {
+        return $this->isErr() && $this->error == $err;
     }
 
     /**
@@ -49,8 +57,8 @@ class Result
      */
     public function unwrap(): mixed
     {
-        if ($this->hasErr()) {
-            throw new ResultUnwrapException('Called `unwrap` on an `Err` value');
+        if ($this->isErr()) {
+            throw new ResultUnwrapException('Called `unwrap` on an `Err` value with error: ' . $this->error);
         }
 
         return $this->value;
@@ -58,8 +66,8 @@ class Result
 
     public function ensure(): void
     {
-        if ($this->hasErr()) {
-            throw new ResultUnwrapException('Assumed `Ok` value but got `Err` value');
+        if ($this->isErr()) {
+            throw new ResultUnwrapException('Assumed `Ok` value but got `Err` value with error: ' . $this->error);
         }
     }
 

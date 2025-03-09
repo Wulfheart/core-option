@@ -15,6 +15,12 @@ class ResultAsserter
     // @phpstan-ignore-next-line
     public static function assertErr(Result $result): void
     {
-        Assert::assertTrue($result->hasErr());
+        Assert::assertTrue($result->isErr());
+    }
+
+    // @phpstan-ignore-next-line
+    public static function assertErrIs(Result $result, mixed $error): void
+    {
+        Assert::assertTrue($result->hasErr($error));
     }
 }
