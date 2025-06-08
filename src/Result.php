@@ -84,4 +84,16 @@ class Result
 
         return $this->error;
     }
+
+    /**
+     * @return Option<TSuccess>
+     */
+    public function toOption(): Option
+    {
+        if ($this->isOk()) {
+            return Option::some($this->value);
+        }
+
+        return Option::none();
+    }
 }
